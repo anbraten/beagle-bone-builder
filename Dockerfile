@@ -4,7 +4,7 @@ ENV PATH "/lfs/linaro/bin:${PATH}"
 
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     xz-utils bc bison flex libssl-dev make libc6-dev libncurses5-dev lzop kmod \
-    util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils wget git
+    util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils wget git rsync
 
 # setup linaro
 RUN mkdir -p /lfs/linaro
