@@ -4,7 +4,7 @@ CMD="${1:-all}"
 
 echo "Building $CMD ..."
 
-DOCKER_ARGS="-rm --privileged"
+DOCKER_ARGS="--rm --privileged"
 if [ -t 0 ] ; then
   DOCKER_ARGS="-it --rm --privileged "
 fi
