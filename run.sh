@@ -1,9 +1,13 @@
 #!/bin/bash
 
+CMD="${1:-all}"
+
+echo "Building $CMD ..."
+
 docker run -it --rm --privileged \
   -v $(pwd)/output:/lfs/output \
   -v $(pwd)/resources:/lfs/resources \
-  embedded-linux-builder /ofs/
+  embedded-linux-builder /lfs/build-$CMD.sh
 
 # services:
 #   app:
