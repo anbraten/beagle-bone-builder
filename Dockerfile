@@ -13,11 +13,9 @@ RUN wget -q -O /lfs/linaro.tar ${LINARO_DOWNLOAD}
 RUN tar xpf /lfs/linaro.tar -C /lfs/linaro --strip-components=1
 
 WORKDIR /lfs
+CMD [ "/lfs/scripts/build-all.sh" ]
 
 # copy scripts and set permissions
 RUN mkdir -p /lfs/scripts/
 COPY ./scripts/* /lfs/scripts/
 RUN chmod +x /lfs/scripts/*
-
-CMD [ "/lfs/scripts/build-all.sh" ]
-
