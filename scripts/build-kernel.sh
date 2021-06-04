@@ -5,8 +5,7 @@ mkdir -p /lfs/output /lfs/tmp/kernel /lfs/tmp/u-boot /lfs/tmp/rootfs/boot /lfs/t
 
 # extract copied files
 # tar xpf /lfs/resources/kernel.tar.gz -C /lfs/kernel --strip-components=1
-git clone https://github.com/beagleboard/linux.git /lfs/tmp/kernel
-git checkout 5.10
+git clone -b 5.10 --single-branch https://github.com/beagleboard/linux.git /lfs/tmp/kernel
 
 # compile Kernel
 cd /lfs/tmp/kernel
