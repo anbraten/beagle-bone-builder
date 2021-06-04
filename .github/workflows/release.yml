@@ -6,7 +6,7 @@ on:
       - "*"
 
 jobs:
-  go-releaser:
+  releaser:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
