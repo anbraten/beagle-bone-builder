@@ -28,19 +28,19 @@ p2=${loop_devices[1]}
 
 mkfs.vfat -F 16 /dev/mapper/$p1 -n boot
 mkfs.ext4 /dev/mapper/$p2 -L rootfs
-mkdir -p /lfs/tmpmnt/boot /lfs/tmpmnt/rootfs
-mount /dev/mapper/$p1 /lfs/tmpmnt/boot/
-mount /dev/mapper/$p2 /lfs/tmpmnt/rootfs/
+mkdir -p /lfs/tmp/tmpmnt/boot /lfs/tmp/tmpmnt/rootfs
+mount /dev/mapper/$p1 /lfs/tmp/tmpmnt/boot/
+mount /dev/mapper/$p2 /lfs/tmp/tmpmnt/rootfs/
 
 # copy files to partitions
-cp -rp /lfs/rootfs/boot/. /lfs/tmpmnt/boot/
-cp -rp /lfs/rootfs/rootfs/. /lfs/tmpmnt/rootfs/
+cp -rp /lfs/rootfs/boot/. /lfs/tmp/tmpmnt/boot/
+cp -rp /lfs/rootfs/rootfs/. /lfs/tmp/tmpmnt/rootfs/
 
 # sync and unmount partitions
-umount /lfs/tmpmnt/boot/
-umount /lfs/tmpmnt/rootfs/
+umount /lfs/tmp/tmpmnt/boot/
+umount /lfs/tmp/tmpmnt/rootfs/
 kpartx -dv sd_image.img
 
 # generate tar archive
-tar -C /lfs -czpf rootfs.tar.gz rootfs
+tar -C /lfs/tmp/ -czpf rootfs.tar.gz rootfs
 echo "Image is Ready!"

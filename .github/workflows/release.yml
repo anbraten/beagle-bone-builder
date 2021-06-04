@@ -25,6 +25,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      - name: Cache lfs tmp
+        uses: actions/cache@v2
+        with:
+          path: ./tmp/
+          key: ${{ runner.os }}-lfs-tmp-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-lfs-tmp-
+
       - name: Setup build environment
         run: ./setup.sh
 
