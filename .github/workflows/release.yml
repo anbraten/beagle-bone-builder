@@ -36,7 +36,13 @@ jobs:
             ${{ runner.os }}-lfs-tmp-
 
       - name: Setup build environment
-        run: ./setup.sh
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: embedded-linux-builder
+          cache-from: type=gha
+          cache-to: type=gha
 
       - name: Build kernel
         run: ./build.sh kernel
