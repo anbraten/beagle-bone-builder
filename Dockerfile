@@ -19,4 +19,5 @@ RUN mkdir -p /lfs/scripts/
 COPY ./scripts/* /lfs/scripts/
 RUN chmod +x /lfs/scripts/*
 
-ENTRYPOINT [ "/lfs/scripts/all.sh" ]
+CMD [ "/lfs/scripts/build-all.sh" ]
+

@@ -29,7 +29,7 @@ jobs:
         run: ./setup.sh
 
       - name: Build kernel
-        run: ./run.sh kernel
+        run: ./build.sh kernel
 
       - name: Release
         uses: softprops/action-gh-release@v1

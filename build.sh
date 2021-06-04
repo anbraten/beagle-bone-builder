@@ -7,7 +7,7 @@ echo "Building $CMD ..."
 docker run -it --rm --privileged \
   -v $(pwd)/output:/lfs/output \
   -v $(pwd)/resources:/lfs/resources \
-  embedded-linux-builder /lfs/build-$CMD.sh
+  embedded-linux-builder /lfs/scripts/build-$CMD.sh
 
 # services:
 #   app:
