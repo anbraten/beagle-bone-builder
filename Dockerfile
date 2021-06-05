@@ -6,8 +6,9 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     ccache cpio wget git make rsync
 
 ENV PATH "/lfs/tmp/linaro/bin:${PATH}"
+ENV CCACHE_DIR "/lfs/tmp/ccache"
 
-RUN mkdir -p /lfs/output /lfs/tmp/ /lfs/linaro /lfs/resources
+RUN mkdir -p /lfs/output /lfs/tmp/ /lfs/linaro /lfs/resources /lfs/tmp/ccache
 
 WORKDIR /lfs
 CMD [ "/lfs/scripts/build-all.sh" ]

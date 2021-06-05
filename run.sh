@@ -13,4 +13,5 @@ docker run $DOCKER_ARGS \
   -v $(pwd)/output:/lfs/output \
   -v $(pwd)/resources:/lfs/resources \
   -v $(pwd)/tmp:/lfs/tmp \
+  -v $(pwd)/cache:/lfs/cache \
   image-builder /lfs/scripts/$CMD.sh

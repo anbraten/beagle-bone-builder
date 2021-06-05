@@ -35,14 +35,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-lfs-tmp-
 
-      - name: Cache lfs resources
-        uses: pat-s/always-upload-cache@v2
-        with:
-          path: ./resources/
-          key: ${{ runner.os }}-lfs-resources-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-lfs-resources-
-
       - name: Setup build environment
         uses: docker/build-push-action@v2
         with:
