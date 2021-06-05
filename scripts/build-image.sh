@@ -1,6 +1,10 @@
 #!/bin/bash
 
+set -e
+
 cd /lfs/output
+
+echo "Building image ..."
 
 # set the size of output image
 image_size=1024M
@@ -40,4 +44,5 @@ kpartx -dv sd_image.img
 
 # generate tar archive
 tar -C /lfs/tmp/ -czpf rootfs.tar.gz fs
+
 echo "Image is Ready!"

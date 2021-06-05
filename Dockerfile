@@ -5,7 +5,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils \
     ccache cpio wget git make rsync
 
-ENV PATH "/lfs/tmp/linaro/bin:${PATH}"
+ENV PATH "/lfs/tmp/linaro/bin:/usr/lib/ccache:${PATH}"
 ENV CCACHE_DIR "/lfs/tmp/ccache"
 
 RUN mkdir -p /lfs/output /lfs/tmp/ /lfs/linaro /lfs/resources /lfs/tmp/ccache
