@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$CI" ]; then
+  echo "Not in CI => running ./setup.sh before continuing"
+  ./setup.sh
+fi
+
 CMD="${1:-build-all}"
 
 echo "Executing /lfs/scripts/$CMD.sh ..."
