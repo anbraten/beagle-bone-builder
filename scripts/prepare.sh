@@ -34,8 +34,8 @@ if [ ! -d /lfs/tmp/fs ]; then
   echo "Downloading rootfs ..."
   wget -nc -nv -O /lfs/resources/rootfs.tar ${ROOTFS_DOWNLOAD} || true
   echo "Extracting rootfs ..."
-  mkdir -p /lfs/tmp/fs/rootfs
-  tar -xOf /lfs/resources/rootfs.tar ./${ROOTFS_NAME}/${ROOTFS_FILE}.tar | tar -x -C /lfs/tmp/fs/rootfs
+  mkdir -p -o root -g root /lfs/tmp/fs/rootfs
+  tar -xpO -f /lfs/resources/rootfs.tar ./${ROOTFS_NAME}/${ROOTFS_FILE}.tar | tar -xp -C /lfs/tmp/fs/rootfs
   # rm /lfs/resources/rootfs.tar
 
   mkdir -p /lfs/tmp/fs/boot
