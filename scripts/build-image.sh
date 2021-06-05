@@ -39,5 +39,5 @@ umount /lfs/tmpmnt/rootfs/
 kpartx -dv sd_image.img
 
 # generate tar archive
-tar -C /lfs/tmp/ -czpf rootfs.tar.gz rootfs
+tar -C /lfs/tmp/ -czpf rootfs.tar.gz fs
 echo "Image is Ready!"
