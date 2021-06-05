@@ -5,12 +5,19 @@ export UBOOT_DOWNLOAD="https://github.com/u-boot/u-boot/archive/refs/tags/v2021.
 export LINARO_DOWNLOAD="https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz"
 
 # create directories
-mkdir -p /lfs/output /lfs/tmp/kernel /lfs/tmp/u-boot /lfs/tmp/rootfs/boot /lfs/tmp/rootfs/rootfs /lfs/tmp/rootfs/rootfs/boot /lfs/linaro
+mkdir -p /lfs/tmp/kernel
+mkdir -p /lfs/tmp/u-boot
+mkdir -p /lfs/tmp/rootfs/boot
+mkdir -p /lfs/tmp/rootfs/rootfs
+mkdir -p /lfs/tmp/rootfs/rootfs/boot
 
-if [ ! -d /lfs/linaro ]; then
+if [ ! -f /lfs/resources/linaro.tar ]; then
+  echo "Downloading linaro ..."
   wget -q -O /lfs/resources/linaro.tar ${LINARO_DOWNLOAD}
   tar xpf /lfs/resources/linaro.tar -C /lfs/linaro --strip-components=1
   # rm /lfs/resources/linaro.tar
+else
+  echo "Linaro files already exist"
 fi
 
 if [ ! -d /lfs/tmp/kernel ]; then

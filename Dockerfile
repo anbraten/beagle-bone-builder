@@ -7,6 +7,8 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 
 ENV PATH "/lfs/linaro/bin:${PATH}"
 
+RUN mkdir -p /lfs/output /lfs/tmp/ /lfs/linaro /lfs/resources
+
 WORKDIR /lfs
 CMD [ "/lfs/scripts/build-all.sh" ]
 
