@@ -9,6 +9,7 @@ export CC=arm-linux-gnueabihf-
 echo "Compiling u-boot ..."
 
 cd /lfs/tmp/u-boot
+
 # make ARCH=arm CROSS_COMPILE="ccache ${CC}" distclean
 make ARCH=arm CROSS_COMPILE="ccache ${CC}" ${uboot_defconfig}
 make ARCH=arm CROSS_COMPILE="ccache ${CC}" -j$(nproc)
