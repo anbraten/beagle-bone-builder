@@ -2,7 +2,7 @@ FROM ubuntu:21.04
 
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     xz-utils bc bison flex libssl-dev make libc6-dev libncurses5-dev lzop kmod \
-    util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils wget git rsync ccache
+    util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils wget git rsync ccache cpio
 
 # setup linaro
 RUN mkdir -p /lfs/linaro
