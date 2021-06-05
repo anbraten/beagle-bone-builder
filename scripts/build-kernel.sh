@@ -1,28 +1,33 @@
 #! /bin/bash
 
-export CC=arm-linux-gnueabihf-
+set -e
+
+export CC="arm-linux-gnueabihf-"
+export CACHED_CC="ccache $CC"
+
+echo "Compiling kernel ..."
 
 cd /lfs/tmp/kernel
 # make ARCH=arm CROSS_COMPILE=${CC} distclean
 # make ARCH=arm CROSS_COMPILE=${CC} clean
 make ARCH=arm CROSS_COMPILE=${CC} bb.org_defconfig
 
-echo "[make ARCH=arm -j$(nproc) CROSS_COMPILE=\"ccache ${CC}\" zImage]"
-make ARCH=arm -j$(nproc) CROSS_COMPILE="ccache ${CC}" zImage
+echo "[make ARCH=arm -j$(nproc) CROSS_COMPILE=\"${CACHED_CC}\" zImage]"
+make ARCH=arm -j$(nproc) CROSS_COMPILE="${CACHED_CC}" zImage
 if [ ! -f arch/arm/boot/zImage ] ; then
 	echo "failed: [arch/arm/boot/zImage]"
 	exit 1
 fi
 
-echo "[make ARCH=arm -j$(nproc) CROSS_COMPILE=\"ccache ${CC}\" modules]"
-make ARCH=arm -j$(nproc) CROSS_COMPILE="ccache ${CC}" modules
+echo "[make ARCH=arm -j$(nproc) CROSS_COMPILE=\"${CACHED_CC}\" modules]"
+make ARCH=arm -j$(nproc) CROSS_COMPILE="${CACHED_CC}" modules
 if [ ! -f drivers/spi/spidev.ko ] ; then
 	echo "failed: [drivers/spi/spidev.ko]"
 	exit 1
 fi
 
-echo "[make ARCH=arm CROSS_COMPILE=\"ccache ${CC}\" dtbs]"
-make ARCH=arm CROSS_COMPILE="ccache ${CC}" dtbs
+echo "[make ARCH=arm CROSS_COMPILE=\"${CACHED_CC}\" dtbs]"
+make ARCH=arm CROSS_COMPILE="${CACHED_CC}" dtbs
 if [ ! -f arch/arm/boot/dts/am335x-boneblack.dtb ] ; then
 	echo "failed: [arch/arm/boot/dts/am335x-boneblack.dtb]"
 	exit 1
@@ -36,11 +41,13 @@ else
 fi
 
 # install kernel modules and headers
-make ARCH=arm CROSS_COMPILE="ccache ${CC}" -j$(nproc) modules_install INSTALL_MOD_PATH=/lfs/tmp/fs/rootfs
-make ARCH=arm CROSS_COMPILE="ccache ${CC}" -j$(nproc) headers_install INSTALL_HDR_PATH=/lfs/tmp/fs/rootfs/usr
+make ARCH=arm CROSS_COMPILE="${CACHED_CC}" -j$(nproc) modules_install INSTALL_MOD_PATH=/lfs/tmp/fs/rootfs
+make ARCH=arm CROSS_COMPILE="${CACHED_CC}" -j$(nproc) headers_install INSTALL_HDR_PATH=/lfs/tmp/fs/rootfs/usr
 
 # install kernel binary and device tree
 cp arch/arm/boot/zImage /lfs/tmp/fs/rootfs/boot
 cp arch/arm/boot/dts/am335x-boneblack.dtb /lfs/tmp/fs/rootfs/boot
 
-# make ARCH=arm CROSS_COMPILE="ccache ${CC}" clean
+# make ARCH=arm CROSS_COMPILE="${CC}" clean
+
+echo "Finished compiling kernel"
