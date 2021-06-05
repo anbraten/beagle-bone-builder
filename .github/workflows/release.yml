@@ -62,7 +62,7 @@ jobs:
         run: ./run.sh build-kernel
 
       - name: Build U-Boot
-        run: ./build.sh build-uboot
+        run: ./run.sh build-uboot
 
       - name: Build image
         run: ./run.sh build-image
