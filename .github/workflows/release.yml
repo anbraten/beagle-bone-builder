@@ -23,7 +23,7 @@ jobs:
         uses: pat-s/always-upload-cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-latest
           restore-keys: |
             ${{ runner.os }}-buildx-
 
@@ -31,30 +31,21 @@ jobs:
         uses: pat-s/always-upload-cache@v2
         with:
           path: ./tmp/ccache
-          key: ${{ runner.os }}-ccache-${{ github.sha }}
+          key: ${{ runner.os }}-ccache-latest
           restore-keys: |
             ${{ runner.os }}-ccache-
 
-      - name: Cache lfs tmp
+      - name: Cache tmp
         uses: pat-s/always-upload-cache@v2
         with:
           path: |
             ./tmp/linaro
-            ./tmp/u-boot
-            ./tmp/kernel
+            ./resources/*.patch
             ./resources/*.tar
             ./resources/*.tar.gz
-          key: ${{ runner.os }}-lfs-tmp-${{ github.sha }}
+          key: ${{ runner.os }}-tmp-latest
           restore-keys: |
             ${{ runner.os }}-lfs-tmp-
-
-      - name: Cache kernel
-        uses: pat-s/always-upload-cache@v2
-        with:
-          path: ./tmp/kernel
-          key: ${{ runner.os }}-kernel-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-kernel
 
       - name: Setup build environment
         uses: docker/build-push-action@v2
@@ -71,7 +62,7 @@ jobs:
       # Temp fix
       # https://github.com/docker/build-push-action/issues/252
       # https://github.com/moby/buildkit/issues/1896
-      - name: Move cache
+      - name: Move docker cache
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
@@ -96,6 +87,11 @@ jobs:
 
       - name: Build image
         run: ./run.sh build-image
+
+      # remove un-compressed images
+      - name: Cleanup output
+        run: |
+          rm -rf ./output/*.img
 
       - name: Release
         uses: softprops/action-gh-release@v1
