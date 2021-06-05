@@ -2,3 +2,5 @@
 *
 # Except this file
 !.gitignore
+!ctag-2.4/
+!ctag-2.4/**
