@@ -27,10 +27,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      - name: Cache ccache
+        uses: pat-s/always-upload-cache@v2
+        with:
+          path: ./tmp/ccache
+          key: ${{ runner.os }}-ccache-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ccache-
+
       - name: Cache lfs tmp
         uses: pat-s/always-upload-cache@v2
         with:
-          path: ./tmp/
+          path: |
+            ./tmp/linaro
+            ./tmp/u-boot
+            ./resources/*.tar
+            ./resources/*.tar.gz
           key: ${{ runner.os }}-lfs-tmp-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-lfs-tmp-
