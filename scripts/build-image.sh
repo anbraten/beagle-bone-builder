@@ -30,8 +30,8 @@ mount /dev/mapper/$p1 /lfs/tmpmnt/boot/
 mount /dev/mapper/$p2 /lfs/tmpmnt/rootfs/
 
 # copy files to partitions
-cp -rp /lfs/tmp/rootfs/boot/. /lfs/tmpmnt/boot/
-cp -rp /lfs/tmp/rootfs/rootfs/. /lfs/tmpmnt/rootfs/
+cp -rp /lfs/tmp/fs/boot/. /lfs/tmpmnt/boot/
+cp -rp /lfs/tmp/fs/rootfs/. /lfs/tmpmnt/rootfs/
 
 # sync and unmount partitions
 umount /lfs/tmpmnt/boot/

@@ -8,9 +8,6 @@ export LINARO_DOWNLOAD="https://releases.linaro.org/components/toolchain/binarie
 export KERNEL_GIT="https://github.com/beagleboard/linux.git"
 export KERNEL_BRANCH="5.10"
 
-# create directories
-mkdir -p /lfs/tmp/kernel
-
 if [ ! -d /lfs/tmp/linaro ]; then
   echo "Downloading linaro ..."
   wget -nc -nv -O /lfs/resources/linaro.tar ${LINARO_DOWNLOAD}
@@ -24,23 +21,23 @@ fi
 
 if [ ! -d /lfs/tmp/kernel ]; then
   echo "Downloading kernel ..."
+  mkdir -p /lfs/tmp/kernel
   git clone -b ${KERNEL_BRANCH} --single-branch ${KERNEL_GIT} /lfs/tmp/kernel
   # tar xpf /lfs/resources/kernel.tar.gz -C /lfs/kernel --strip-components=1
 else
   echo "Kernel files already exist"
 fi
 
-if [ ! -d /lfs/tmp/rootfs ]; then
+if [ ! -d /lfs/tmp/fs ]; then
   echo "Downloading rootfs ..."
   wget -nc -nv -O /lfs/resources/rootfs.tar ${ROOTFS_DOWNLOAD}
   echo "Extracting rootfs ..."
-  mkdir -p /lfs/tmp/rootfs
-  tar -xOf /lfs/resources/rootfs.tar ./${ROOTFS_NAME}/${ROOTFS_FILE}.tar | tar -x -C /lfs/tmp/rootfs
+  mkdir -p /lfs/tmp/fs/rootfs
+  tar -xOf /lfs/resources/rootfs.tar ./${ROOTFS_NAME}/${ROOTFS_FILE}.tar | tar -x -C /lfs/tmp/fs/rootfs
   # rm /lfs/resources/rootfs.tar
 
-  mkdir -p /lfs/tmp/rootfs/boot
-  mkdir -p /lfs/tmp/rootfs/rootfs
-  mkdir -p /lfs/tmp/rootfs/rootfs/boot
+  mkdir -p /lfs/tmp/fs/boot
+  mkdir -p /lfs/tmp/fs/rootfs/boot
 else
   echo "Rootfs files already exist"
 fi
