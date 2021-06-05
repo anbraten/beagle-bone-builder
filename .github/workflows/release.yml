@@ -67,13 +67,13 @@ jobs:
         run: ./run.sh prepare
 
       - name: Build kernel
-        run: ./run.sh kernel
+        run: ./run.sh build-kernel
 
       - name: Build U-Boot
-        run: ./build.sh uboot
+        run: ./build.sh build-uboot
 
       - name: Build image
-        run: ./run.sh image
+        run: ./run.sh build-image
 
       - name: Release
         uses: softprops/action-gh-release@v1
