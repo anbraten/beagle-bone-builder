@@ -41,11 +41,20 @@ jobs:
           path: |
             ./tmp/linaro
             ./tmp/u-boot
+            ./tmp/kernel
             ./resources/*.tar
             ./resources/*.tar.gz
           key: ${{ runner.os }}-lfs-tmp-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-lfs-tmp-
+
+      - name: Cache kernel
+        uses: pat-s/always-upload-cache@v2
+        with:
+          path: ./tmp/kernel
+          key: ${{ runner.os }}-kernel-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-kernel
 
       - name: Setup build environment
         uses: docker/build-push-action@v2
