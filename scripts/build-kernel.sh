@@ -1,19 +1,10 @@
 #! /bin/bash
 
-# create directories
-mkdir -p /lfs/output /lfs/tmp/kernel /lfs/tmp/u-boot /lfs/tmp/rootfs/boot /lfs/tmp/rootfs/rootfs /lfs/tmp/rootfs/rootfs/boot
-
-# extract copied files
-# tar xpf /lfs/resources/kernel.tar.gz -C /lfs/kernel --strip-components=1
-if [ ! -d /lfs/tmp/kernel ]; then
-  git clone -b 5.10 --single-branch https://github.com/beagleboard/linux.git /lfs/tmp/kernel
-fi
-
 export CC=arm-linux-gnueabihf-
 
 cd /lfs/tmp/kernel
-make ARCH=arm CROSS_COMPILE=${CC} distclean
-make ARCH=arm CROSS_COMPILE=${CC} clean
+# make ARCH=arm CROSS_COMPILE=${CC} distclean
+# make ARCH=arm CROSS_COMPILE=${CC} clean
 make ARCH=arm CROSS_COMPILE=${CC} bb.org_defconfig
 
 echo "[make ARCH=arm -j$(nproc) CROSS_COMPILE=\"ccache ${CC}\" zImage]"
@@ -44,13 +35,12 @@ else
 	fi
 fi
 
-make ARCH=arm CROSS_COMPILE=${CC} clean
-# rm -rf ./gcc-* || true
-
-# # install kernel modules and headers
-# make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc) modules_install INSTALL_MOD_PATH=/lfs/tmp/rootfs/rootfs
-# make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc) headers_install INSTALL_HDR_PATH=/lfs/tmp/rootfs/rootfs/usr
+# install kernel modules and headers
+make ARCH=arm CROSS_COMPILE="ccache ${CC}" -j$(nproc) modules_install INSTALL_MOD_PATH=/lfs/tmp/rootfs/rootfs
+make ARCH=arm CROSS_COMPILE="ccache ${CC}" -j$(nproc) headers_install INSTALL_HDR_PATH=/lfs/tmp/rootfs/rootfs/usr
 
 # install kernel binary and device tree
 cp arch/arm/boot/zImage /lfs/tmp/rootfs/rootfs/boot
 cp arch/arm/boot/dts/am335x-boneblack.dtb /lfs/tmp/rootfs/rootfs/boot
+
+# make ARCH=arm CROSS_COMPILE="ccache ${CC}" clean

@@ -5,6 +5,8 @@
 #author		     :M.Rahimi <info@masoudrahimi.com>
 #==============================================================================
 
+cd /lfs/output
+
 # set the size of output image
 image_size=1024M
 
@@ -28,17 +30,17 @@ p2=${loop_devices[1]}
 
 mkfs.vfat -F 16 /dev/mapper/$p1 -n boot
 mkfs.ext4 /dev/mapper/$p2 -L rootfs
-mkdir -p /lfs/tmp/tmpmnt/boot /lfs/tmp/tmpmnt/rootfs
-mount /dev/mapper/$p1 /lfs/tmp/tmpmnt/boot/
-mount /dev/mapper/$p2 /lfs/tmp/tmpmnt/rootfs/
+mkdir -p /lfs/tmpmnt/boot /lfs/tmpmnt/rootfs
+mount /dev/mapper/$p1 /lfs/tmpmnt/boot/
+mount /dev/mapper/$p2 /lfs/tmpmnt/rootfs/
 
 # copy files to partitions
-cp -rp /lfs/rootfs/boot/. /lfs/tmp/tmpmnt/boot/
-cp -rp /lfs/rootfs/rootfs/. /lfs/tmp/tmpmnt/rootfs/
+cp -rp /lfs/tmp/rootfs/boot/. /lfs/tmpmnt/boot/
+cp -rp /lfs/tmp/rootfs/rootfs/. /lfs/tmpmnt/rootfs/
 
 # sync and unmount partitions
-umount /lfs/tmp/tmpmnt/boot/
-umount /lfs/tmp/tmpmnt/rootfs/
+umount /lfs/tmpmnt/boot/
+umount /lfs/tmpmnt/rootfs/
 kpartx -dv sd_image.img
 
 # generate tar archive

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t embedded-linux-builder .
+docker build -t image-builder .

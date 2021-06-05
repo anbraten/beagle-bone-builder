@@ -35,6 +35,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-lfs-tmp-
 
+      - name: Cache lfs resources
+        uses: pat-s/always-upload-cache@v2
+        with:
+          path: ./resources/
+          key: ${{ runner.os }}-lfs-resources-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-lfs-resources-
+
       - name: Setup build environment
         uses: docker/build-push-action@v2
         with:
@@ -55,8 +63,17 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
+      - name: Prepare environment
+        run: ./run.sh prepare
+
       - name: Build kernel
-        run: ./build.sh kernel
+        run: ./run.sh kernel
+
+      - name: Build U-Boot
+        run: ./build.sh uboot
+
+      - name: Build image
+        run: ./run.sh image
 
       - name: Release
         uses: softprops/action-gh-release@v1
