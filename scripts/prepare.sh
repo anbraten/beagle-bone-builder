@@ -6,15 +6,12 @@ export LINARO_DOWNLOAD="https://releases.linaro.org/components/toolchain/binarie
 
 # create directories
 mkdir -p /lfs/tmp/kernel
-mkdir -p /lfs/tmp/u-boot
-mkdir -p /lfs/tmp/rootfs/boot
-mkdir -p /lfs/tmp/rootfs/rootfs
-mkdir -p /lfs/tmp/rootfs/rootfs/boot
 
-if [ ! -f /lfs/resources/linaro.tar ]; then
+if [ ! -d /lfs/tmp/linaro ]; then
   echo "Downloading linaro ..."
-  wget -q -O /lfs/resources/linaro.tar ${LINARO_DOWNLOAD}
-  tar xpf /lfs/resources/linaro.tar -C /lfs/linaro --strip-components=1
+  wget -nc -nv -O /lfs/resources/linaro.tar ${LINARO_DOWNLOAD}
+  mkdir -p /lfs/tmp/linaro
+  tar xpf /lfs/resources/linaro.tar -C /lfs/tmp/linaro --strip-components=1
   # rm /lfs/resources/linaro.tar
 else
   echo "Linaro files already exist"
@@ -28,9 +25,12 @@ else
   echo "Kernel files already exist"
 fi
 
-if [ ! -f /lfs/resources/rootfs.tar ]; then
+if [ ! -d /lfs/tmp/rootfs ]; then
   echo "Downloading rootfs ..."
-  wget -q -O /lfs/resources/rootfs.tar ${ROOTFS_DOWNLOAD}
+  wget -nc -nv -O /lfs/resources/rootfs.tar ${ROOTFS_DOWNLOAD}
+  mkdir -p /lfs/tmp/rootfs/boot
+  mkdir -p /lfs/tmp/rootfs/rootfs
+  mkdir -p /lfs/tmp/rootfs/rootfs/boot
   # tar xpf /lfs/rootfs.tar -C /lfs/rootfs --strip-components=1
   tar xpf /lfs/resources/rootfs.tar -C /lfs/tmp/rootfs
   # rm /lfs/resources/rootfs.tar
@@ -38,9 +38,10 @@ else
   echo "Rootfs files already exist"
 fi
 
-if [ ! -f /lfs/resources/u-boot.tar.gz ]; then
+if [ ! -d /lfs/tmp/u-boot ]; then
   echo "Downloading u-boot ..."
-  wget -q -O /lfs/resources/u-boot.tar.gz ${UBOOT_DOWNLOAD}
+  wget -nc -nv -O /lfs/resources/u-boot.tar.gz ${UBOOT_DOWNLOAD}
+  mkdir -p /lfs/tmp/u-boot
   tar xpf /lfs/resources/u-boot.tar.gz -C /lfs/tmp/u-boot --strip-components=1
   # rm /lfs/resources/u-boot.tar.gz
 else

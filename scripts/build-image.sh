@@ -1,9 +1,4 @@
 #!/bin/bash
-#title           :image_generator.sh
-#project         :Embedded Linux Image Builder https://github.com/masoudr/embedded-linux-image-builder
-#description     :This script will make the output image file
-#author		     :M.Rahimi <info@masoudrahimi.com>
-#==============================================================================
 
 cd /lfs/output
 

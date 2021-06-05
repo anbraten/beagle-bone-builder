@@ -5,7 +5,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils \
     ccache cpio wget git make rsync
 
-ENV PATH "/lfs/linaro/bin:${PATH}"
+ENV PATH "/lfs/tmp/linaro/bin:${PATH}"
 
 RUN mkdir -p /lfs/output /lfs/tmp/ /lfs/linaro /lfs/resources
 
