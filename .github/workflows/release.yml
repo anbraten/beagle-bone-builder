@@ -70,6 +70,9 @@ jobs:
       - name: Prepare environment
         run: ./run.sh prepare
 
+      - name: Prepare kernel
+        run: ./run.sh prepare-kernel
+
       - name: Build kernel image
         run: ./run.sh build-kernel-image
 
@@ -81,6 +84,9 @@ jobs:
 
       - name: Install kernel
         run: ./run.sh install-kernel
+
+      - name: Install rootfs
+        run: ./run.sh install-rootfs
 
       - name: Build U-Boot
         run: ./run.sh build-uboot
