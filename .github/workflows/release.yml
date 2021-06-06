@@ -45,7 +45,7 @@ jobs:
             ./resources/*.tar.gz
           key: ${{ runner.os }}-tmp-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-lfs-tmp-
+            ${{ runner.os }}-tmp-
 
       - name: Setup build environment
         uses: docker/build-push-action@v2
