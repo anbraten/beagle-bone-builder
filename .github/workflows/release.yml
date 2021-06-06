@@ -23,7 +23,7 @@ jobs:
         uses: pat-s/always-upload-cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-latest
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
 
@@ -31,7 +31,7 @@ jobs:
         uses: pat-s/always-upload-cache@v2
         with:
           path: ./tmp/ccache
-          key: ${{ runner.os }}-ccache-latest
+          key: ${{ runner.os }}-ccache-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-ccache-
 
@@ -43,7 +43,7 @@ jobs:
             ./resources/*.patch
             ./resources/*.tar
             ./resources/*.tar.gz
-          key: ${{ runner.os }}-tmp-latest
+          key: ${{ runner.os }}-tmp-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-lfs-tmp-
 
