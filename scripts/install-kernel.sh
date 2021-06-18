@@ -2,10 +2,7 @@
 
 set -e
 
-export ECHO_PREFIX="[\e[96mImage-Builder\e[0m] "
-
-export CC="arm-linux-gnueabihf-"
-export CACHED_CC="ccache $CC"
+source /lfs/scripts/config.sh
 
 echo -e "${ECHO_PREFIX}Installing kernel ..."
 

@@ -2,15 +2,13 @@
 
 set -e
 
-export ECHO_PREFIX="[\e[96mImage-Builder\e[0m] "
-
-export LINARO_DOWNLOAD="https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz"
+source /lfs/scripts/config.sh
 
 # cleanup environment
 echo -e "${ECHO_PREFIX}Cleaning environment ..."
 rm -rf /lfs/tmp/fs
 rm -rf /lfs/tmp/u-boot
-rm -rf /lfs/resources/u-boot*.patch
+# rm -rf /lfs/resources/u-boot*.patch
 rm -rf /lfs/output/*
 
 if [ ! -d /lfs/tmp/linaro ]; then

@@ -2,17 +2,15 @@
 
 set -e
 
-export ECHO_PREFIX="[\e[96mImage-Builder\e[0m] "
-
-export IMAGE_DATE=$(date '+%F_%H-%M-%S')
-export IMAGE_NAME="bone-debian-10.9-armhf-k5.10-$IMAGE_DATE"
+source /lfs/scripts/config.sh
 
 cd /lfs/output
 
 echo -e "${ECHO_PREFIX}Building image ..."
 
 # set the size of output image
-image_size=1024M
+# image_size=1024M
+image_size=2048M
 
 echo -e "${ECHO_PREFIX}Creating new disk-image ..."
 qemu-img create image.img $image_size

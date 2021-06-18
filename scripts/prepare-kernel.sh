@@ -2,10 +2,7 @@
 
 set -e
 
-export ECHO_PREFIX="[\e[96mImage-Builder\e[0m] "
-
-export KERNEL_GIT="https://github.com/beagleboard/linux.git"
-export KERNEL_BRANCH="5.10"
+source /lfs/scripts/config.sh
 
 if [ ! -d /lfs/tmp/kernel ]; then
   echo -e "${ECHO_PREFIX}Downloading kernel ..."

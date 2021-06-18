@@ -2,10 +2,7 @@
 
 set -e
 
-export ECHO_PREFIX="[\e[96mImage-Builder\e[0m] "
-
-export CC="arm-linux-gnueabihf-"
-export CACHED_CC="ccache $CC"
+source /lfs/scripts/config.sh
 
 echo -e "${ECHO_PREFIX}Compiling kernel modules ..."
 
@@ -16,13 +13,11 @@ make ARCH=arm CROSS_COMPILE="${CACHED_CC}" dtbs
 if [ ! -f arch/arm/boot/dts/am335x-boneblack.dtb ] ; then
 	echo -e "${ECHO_PREFIX}failed: [arch/arm/boot/dts/am335x-boneblack.dtb]"
 	exit 1
-else
-	if [ -f arch/arm/boot/dts/am335x-pocketbeagle.dts ] ; then
-		if [ ! -f arch/arm/boot/dts/am335x-pocketbeagle.dtb ] ; then
-			echo -e "${ECHO_PREFIX}failed: [arch/arm/boot/dts/am335x-pocketbeagle.dtb]"
-			exit 1
-		fi
-	fi
 fi
 
-echo -e "${ECHO_PREFIX}Finished compiling kernel modules"
+# install device tree
+mkdir -p /lfs/tmp/fs/rootfs/boot/dtbs/${KERNEL_VERSION}/
+# cp arch/arm/boot/dts/am335x-boneblack.dtb /lfs/tmp/fs/rootfs/boot/dtbs/${KERNEL_VERSION}/
+cp arch/arm/boot/dts/am335x-boneblack.dtb /lfs/tmp/fs/rootfs/boot/
+
+echo -e "${ECHO_PREFIX}Finished compiling & installing kernel device-tree"

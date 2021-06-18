@@ -2,11 +2,7 @@
 
 set -e
 
-export ECHO_PREFIX="[\e[96mImage-Builder\e[0m] "
-
-export ROOTFS_DOWNLOAD="https://rcn-ee.com/rootfs/eewiki/minfs/debian-10.9-minimal-armhf-2021-04-14.tar.xz"
-export ROOTFS_NAME="debian-10.9-minimal-armhf-2021-04-14"
-export ROOTFS_FILE="armhf-rootfs-debian-buster"
+source /lfs/scripts/config.sh
 
 if [ ! -f /lfs/resources/rootfs.tar ]; then
   echo -e "${ECHO_PREFIX}Downloading rootfs ..."
