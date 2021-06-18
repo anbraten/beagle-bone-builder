@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - kernel-version: 5.10.35
-            kernel-branch: 5.10
+          - kernel-version: "5.10.35"
+            kernel-branch: "5.10"
             uboot-version: v2021.07-rc3
             rootfs-name: debian-10.9-minimal-armhf-2021-04-14
     steps:
