@@ -15,7 +15,15 @@ jobs:
         include:
           - kernel-version: "5.10.35"
             kernel-branch: "5.10"
-            uboot-version: v2021.07-rc3
+            uboot-version: v2021.07-rc4
+            rootfs-name: debian-10.9-minimal-armhf-2021-04-14
+          - kernel-version: "5.10.35"
+            kernel-branch: "5.10-rt"
+            uboot-version: v2021.07-rc4
+            rootfs-name: debian-10.9-minimal-armhf-2021-04-14
+          - kernel-version: "4.19.94"
+            kernel-branch: "4.19-rt"
+            uboot-version: v2021.07-rc4
             rootfs-name: debian-10.9-minimal-armhf-2021-04-14
     steps:
       - name: Checkout
