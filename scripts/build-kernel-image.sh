@@ -8,8 +8,8 @@ echo -e "${ECHO_PREFIX}Compiling kernel image ..."
 
 cd /lfs/tmp/kernel
 
-# make ARCH=arm CROSS_COMPILE=${CC} clean
-# make ARCH=arm CROSS_COMPILE=${CC} bb.org_defconfig
+make ARCH=arm CROSS_COMPILE=${CC} clean
+make ARCH=arm CROSS_COMPILE=${CC} bb.org_defconfig
 
 echo -e "${ECHO_PREFIX}[make ARCH=arm -j$(nproc) CROSS_COMPILE=\"${CACHED_CC}\" zImage]"
 make ARCH=arm -j$(nproc) CROSS_COMPILE="${CACHED_CC}" zImage
