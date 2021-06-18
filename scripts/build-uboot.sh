@@ -36,7 +36,7 @@ fi
 echo -e "${ECHO_PREFIX}Compiling u-boot ..."
 
 # make ARCH=arm CROSS_COMPILE="ccache ${CC}" distclean
-make ARCH=arm CROSS_COMPILE="ccache ${CC}" ${uboot_defconfig}
+make ARCH=arm CROSS_COMPILE="ccache ${CC}" ${UBOOT_DEFCONFIG}
 make ARCH=arm CROSS_COMPILE="ccache ${CC}" -j$(nproc)
 
 echo -e "${ECHO_PREFIX}Installing u-boot files ..."
