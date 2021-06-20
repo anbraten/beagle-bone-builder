@@ -2,7 +2,7 @@
 
 ./setup.sh
 
-DOCKER_ARGS="-it --rm --privileged "
+DOCKER_ARGS="-it --rm --privileged"
 
 docker run $DOCKER_ARGS \
   -v $(pwd)/output:/lfs/output \
