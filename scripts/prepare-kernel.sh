@@ -17,7 +17,7 @@ cd /lfs/tmp/kernel
 
 if [ "$KERNEL_BRANCH" == "5.10" ] || [ "$KERNEL_BRANCH" == "5.10-rt" ]; then
   echo -e "${ECHO_PREFIX}Patching kernel with CTAG-2.4 driver ..."
-  patch -t -s -p0 < /lfs/resources/ctag-2.4/ctag-2.4-k5.10.patch || true
+  patch -t -s -p1 < /lfs/resources/ctag-2.4/ctag-2.4-k5.10.patch || true
 fi
 
 make ARCH=arm CROSS_COMPILE=${CC} clean
@@ -25,5 +25,5 @@ make ARCH=arm CROSS_COMPILE=${CC} bb.org_defconfig
 
 if [ "$KERNEL_BRANCH" == "5.10" ] || [ "$KERNEL_BRANCH" == "5.10-rt" ]; then
   echo -e "${ECHO_PREFIX}Enabling CTAG-2.4 driver ..."
-  patch -t /lfs/tmp/kernel /lfs/resources/ctag-2.4/.config.patch || true
+  patch -t /lfs/tmp/kernel/.config /lfs/resources/ctag-2.4/.config.patch || true
 fi
